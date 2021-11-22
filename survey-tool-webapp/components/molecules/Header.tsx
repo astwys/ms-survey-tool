@@ -7,7 +7,6 @@ export default function Header() {
   const { user, mutateUser } = useUser()
   const router = useRouter()
 
-  console.log('user:', user)
   return (
     <header>
       <nav>
