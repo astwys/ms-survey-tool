@@ -7,7 +7,6 @@ import LinkListElement from '../components/atoms/LinkListElement'
 
 import { Survey } from '../types/Survey'
 
-import styles from '../styles/Dashboard.module.css'
 import Layout from '../components/templates/Layout'
 import { withIronSessionSsr } from 'iron-session/next'
 import { sessionOptions } from '../lib/session'
@@ -21,7 +20,7 @@ const Dashboard = (props: InferGetServerSidePropsType<typeof getServerSideProps>
 
   return (
     <Layout>
-      <div className={styles.container}>
+      <div className="container">
         <List>
           {data.map(s => (
             <LinkListElement text={s.name} href={`/survey/edit/${s.id}`} key={s.id} />

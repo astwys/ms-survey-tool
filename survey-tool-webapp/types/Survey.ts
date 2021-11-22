@@ -25,3 +25,7 @@ export type Survey = {
 }
 
 export type SurveyWithoutId = Without<Survey, 'id'>
+
+export type ShortTextAnswers = {
+  [id: number]: string
+}

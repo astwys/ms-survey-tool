@@ -5,7 +5,7 @@ import styles from '../styles/Home.module.css'
 const Home: NextPage = () => {
   return (
     <Layout>
-      <div className={styles.container}>
+      <div className="container">
         <main></main>
       </div>
     </Layout>
