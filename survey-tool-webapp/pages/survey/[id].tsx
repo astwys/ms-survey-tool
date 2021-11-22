@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router'
+import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import useSWR from 'swr'
 import Button from '../../components/atoms/Button'
@@ -41,6 +42,9 @@ const Survey = () => {
   if (!data || !survey) return <div>loading...</div>
   return (
     <div className="container">
+      <Head>
+        <title>Survey Tool</title>
+      </Head>
       <h1>{survey.name}</h1>
       {survey.questions.map(q => (
         <p key={q.id}>
