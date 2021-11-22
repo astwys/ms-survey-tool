@@ -1,3 +1,5 @@
+import { Without } from './utils'
+
 export type QuestionType = 'ShortText' | 'LongText'
 
 export type BaseQuestion = {
@@ -21,3 +23,5 @@ export type Survey = {
   name: string
   questions: Question[]
 }
+
+export type SurveyWithoutId = Without<Survey, 'id'>

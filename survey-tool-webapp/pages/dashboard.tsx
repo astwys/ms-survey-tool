@@ -1,4 +1,5 @@
 import { NextPage } from 'next'
+import Link from 'next/link'
 import useSWR from 'swr'
 
 import List from '../components/molecules/List'
@@ -23,6 +24,9 @@ const Dashboard: NextPage = () => {
           <LinkListElement text={s.name} href={`/survey/edit/${s.id}`} key={s.id} />
         ))}
       </List>
+      <Link href={'/survey/create'}>
+        <a>Create new Survey</a>
+      </Link>
     </div>
   )
 }

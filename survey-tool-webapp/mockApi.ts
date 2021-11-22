@@ -1,8 +1,5 @@
 import { mockSurveys } from './mockData'
-import { Survey } from './types/Survey'
-import { Without } from './types/utils'
-
-type BaseSurvey = Without<Survey, 'id'>
+import { Survey, SurveyWithoutId } from './types/Survey'
 
 let surveys = [...mockSurveys]
 
@@ -14,7 +11,7 @@ export function findById(id: number): Survey | undefined {
   return surveys.find(s => s.id === id)
 }
 
-export function createOne(baseSurvey: BaseSurvey) {
+export function createOne(baseSurvey: SurveyWithoutId) {
   const id = surveys[surveys.length - 1].id + 1
   const survey = {
     ...baseSurvey,
