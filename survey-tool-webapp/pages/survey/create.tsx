@@ -6,6 +6,7 @@ import Button from '../../components/atoms/Button'
 import InputField from '../../components/atoms/InputField'
 import { createSurvey } from '../../requests/survey'
 import { Question, SurveyWithoutId } from '../../types/Survey'
+import SurveyQuestionSet from '../../components/molecules/SurveyQuestionSet'
 
 const CreateSurvey = () => {
   const router = useRouter()
@@ -22,20 +23,11 @@ const CreateSurvey = () => {
     })
   }
 
-  const onChangeQuestion = (id: number) => (text: string) => {
-    const newQuestions = survey.questions.map(q => {
-      if (q.id === id) {
-        q.text = text
-      }
-
-      return q
-    })
-
+  const onChangeQuestions = (questions: Question[]) =>
     setSurvey({
       ...survey,
-      questions: newQuestions,
+      questions,
     })
-  }
 
   const onClickAddQuestion = () => {
     const id = survey.questions.length ? survey.questions[survey.questions.length - 1].id + 1 : 1
@@ -61,13 +53,7 @@ const CreateSurvey = () => {
   return (
     <div className={styles.container}>
       <InputField text={survey.name} onChange={onChangeSurveyName} inputType="text" />
-      <div className={styles.questionList}>
-        {survey.questions.map(q => (
-          <p key={q.id}>
-            <InputField text={q.text} onChange={onChangeQuestion(q.id)} inputType="text" />
-          </p>
-        ))}
-      </div>
+      <SurveyQuestionSet questions={survey.questions} onChange={onChangeQuestions} />
       <Button text="Add Question" type="primary" onClick={onClickAddQuestion} />
       <Button text="Save" type="success" onClick={onClickSave} />
     </div>

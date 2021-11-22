@@ -11,6 +11,7 @@ import { Question, Survey } from '../../../types/Survey'
 import styles from '../../../styles/EditSurvey.module.css'
 import Button from '../../../components/atoms/Button'
 import { updateSurvey } from '../../../requests/survey'
+import SurveyQuestionSet from '../../../components/molecules/SurveyQuestionSet'
 
 const EditSurvey: NextPage = () => {
   const router = useRouter()
@@ -25,22 +26,14 @@ const EditSurvey: NextPage = () => {
     }
   }, [data])
 
-  const onChangeQuestion = (id: number) => (text: string) => {
+  const onChangeQuestions = (questions: Question[]) => {
     if (!survey) {
       return
     }
 
-    const newQuestions = survey?.questions.map(q => {
-      if (q.id === id) {
-        q.text = text
-      }
-
-      return q
-    })
-
     setSurvey({
       ...survey,
-      questions: newQuestions,
+      questions,
     })
   }
 
@@ -78,13 +71,7 @@ const EditSurvey: NextPage = () => {
   return (
     <div className={styles.container}>
       <h1>{survey.name}</h1>
-      <div className={styles.questionList}>
-        {survey.questions.map(q => (
-          <p key={q.id}>
-            <InputField text={q.text} onChange={onChangeQuestion(q.id)} inputType="text" />
-          </p>
-        ))}
-      </div>
+      <SurveyQuestionSet questions={survey.questions} onChange={onChangeQuestions} />
       <Button text="Add Question" type="primary" onClick={onClickAddQuestion} />
       <Button text="Save" type="success" onClick={onClickSave} />
     </div>
