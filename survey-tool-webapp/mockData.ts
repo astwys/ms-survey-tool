@@ -6,6 +6,7 @@ const mockSurveys: Survey[] = [
     name: 'S1',
     questions: [
       {
+        id: 1,
         type: 'ShortText',
         text: 'What is your name',
       },

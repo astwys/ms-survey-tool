@@ -1,6 +1,7 @@
 export type QuestionType = 'ShortText' | 'LongText'
 
 export type BaseQuestion = {
+  id: number
   type: QuestionType
   text: string
 }

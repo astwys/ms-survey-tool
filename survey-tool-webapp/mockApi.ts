@@ -11,7 +11,6 @@ export function findAll(): Survey[] {
 }
 
 export function findById(id: number): Survey | undefined {
-  console.log(surveys)
   return surveys.find(s => s.id === id)
 }
 
@@ -22,5 +21,17 @@ export function createOne(baseSurvey: BaseSurvey) {
     id,
   }
   surveys = [...surveys, survey]
+  return survey
+}
+
+export function updateById(id: number, survey: Survey): Survey | undefined {
+  const idx = surveys.findIndex(s => s.id === id)
+
+  if (idx === -1) {
+    return
+  }
+
+  surveys[idx] = survey
+
   return survey
 }
