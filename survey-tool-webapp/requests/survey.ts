@@ -1,6 +1,6 @@
 import { Survey, SurveyWithoutId } from '../types/Survey'
 
-export function updateSurvey(id: number, survey: Survey): Promise<Response> {
+export function updateSurvey(id: string, survey: Survey): Promise<Response> {
   return fetch(`/api/survey/${id}`, {
     body: JSON.stringify(survey),
     headers: {
