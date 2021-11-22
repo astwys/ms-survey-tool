@@ -21,6 +21,7 @@ const Dashboard = (props: InferGetServerSidePropsType<typeof getServerSideProps>
   return (
     <Layout>
       <div className="container">
+        <h1>Surveys</h1>
         <List>
           {data.map(s => (
             <LinkListElement text={s.name} href={`/survey/edit/${s.id}`} key={s.id} />

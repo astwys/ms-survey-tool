@@ -36,7 +36,9 @@ const CreateUpdateSurvey = (props: CreateUpdateSurveyProps) => {
     })
 
   const onClickAddQuestion = () => {
-    const id = survey.questions.length ? survey.questions[survey.questions.length - 1].id + 1 : 1
+    const id = survey.questions.length
+      ? (parseInt(survey.questions[survey.questions.length - 1].id) + 1).toString()
+      : '1'
     const newQuestion: Question = {
       id,
       type: 'ShortText',
@@ -63,8 +65,20 @@ const CreateUpdateSurvey = (props: CreateUpdateSurveyProps) => {
     router.push('/dashboard')
   }
 
+  const renderHeader = () => {
+    let headerText = ''
+    if (props.type === 'create') {
+      headerText = 'Create Survey'
+    } else if (props.type === 'update') {
+      headerText = 'Edit Survey'
+    }
+
+    return <h1>{headerText}</h1>
+  }
+
   return (
     <div className="container">
+      {renderHeader()}
       <InputFieldLabel htmlFor="survey-name">Survey Name</InputFieldLabel>
       <InputField text={survey.name} id="survey-name" onChange={onChangeSurveyName} type="text" />
       <SurveyQuestionSet questions={survey.questions} onChange={onChangeQuestions} />
