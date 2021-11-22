@@ -1,12 +1,12 @@
 import mongoose from 'mongoose'
 
 const AnswersSchema = new mongoose.Schema({
-  key: String,
-  value: String,
+  questionId: mongoose.Types.ObjectId,
+  text: String,
 })
 const SurveyAnswersSchema = new mongoose.Schema({
-  key: String,
-  value: [AnswersSchema],
+  surveyId: mongoose.Types.ObjectId,
+  answers: [AnswersSchema],
 })
 
 export { SurveyAnswersSchema }

@@ -13,20 +13,27 @@ const Survey = () => {
   const { id } = router.query
   const [survey, setSurvey] = useState<Survey>()
   const { data, error } = useSWR<Survey>(id ? `/api/survey/${id}` : null)
-  const [answers, setAnswers] = useState<Answers>({})
+  const [answers, setAnswers] = useState<Answers[]>([])
 
   useEffect(() => {
     if (data) {
       setSurvey(data)
-      const answerSet: ShortTextAnswers = {}
-      data.questions.forEach(q => (answerSet[q.id] = ''))
+      const answerSet: ShortTextAnswers[] = data.questions.map(q => ({
+        questionId: q._id as string,
+        text: '',
+      }))
       setAnswers(answerSet)
     }
   }, [data])
 
   const onChangeAnswer = (id: string) => (text: string) => {
-    const newAnswers = { ...answers }
-    newAnswers[id] = text
+    const newAnswers = answers.map(a => {
+      if (a.questionId === id) {
+        a.text = text
+      }
+      return a
+    })
+
     setAnswers(newAnswers)
   }
 
@@ -34,7 +41,7 @@ const Survey = () => {
     if (!survey) {
       return
     }
-    await createAnswerSet(survey.id, answers)
+    await createAnswerSet(survey._id, answers)
     router.reload()
   }
 
@@ -46,12 +53,20 @@ const Survey = () => {
         <title>Survey Tool</title>
       </Head>
       <h1>{survey.name}</h1>
-      {survey.questions.map(q => (
-        <p key={q.id}>
-          <InputFieldLabel htmlFor={q.id}>{q.text}</InputFieldLabel>
-          <InputField id={q.id} type="text" text={answers[q.id]} onChange={onChangeAnswer(q.id)} />
-        </p>
-      ))}
+      {survey.questions.map(q => {
+        const answer = answers.find(a => a.questionId === q._id)
+        return (
+          <p key={q._id}>
+            <InputFieldLabel htmlFor={q._id}>{q.text}</InputFieldLabel>
+            <InputField
+              id={q._id}
+              type="text"
+              text={answer?.text as string}
+              onChange={onChangeAnswer(q._id as string)}
+            />
+          </p>
+        )
+      })}
       <Button color="success" text="Submit" onClick={onSubmit} />
     </div>
   )

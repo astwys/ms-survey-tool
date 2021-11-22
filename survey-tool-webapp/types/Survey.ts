@@ -28,19 +28,23 @@ export type Survey = {
 export type SurveyWithoutId = Without<Survey, '_id'>
 export type QuestionWithoutId = Without<Question, '_id'>
 
-// id: question id
-export type ShortTextAnswers = {
-  [id: string]: string
+export type BaseAnswer = {
+  _id?: string
+  questionId: string
 }
 
-// id: question id
-export type LongTextAnswers = {
-  [id: string]: string
+export interface ShortTextAnswers extends BaseAnswer {
+  text: string
+}
+
+export interface LongTextAnswers extends BaseAnswer {
+  text: string
 }
 
 export type Answers = ShortTextAnswers | LongTextAnswers
 
-// id: survey id
 export type SurveyAnswers = {
-  [id: string]: Answers[]
+  _id?: string
+  surveyId: string
+  answers: Answers[]
 }
