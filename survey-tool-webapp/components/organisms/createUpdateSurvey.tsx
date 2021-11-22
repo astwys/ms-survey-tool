@@ -2,11 +2,18 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { useSWRConfig } from 'swr'
 import { createSurvey, updateSurvey } from '../../requests/survey'
-import { Question, Survey, SurveyWithoutId } from '../../types/Survey'
+import {
+  Question,
+  QuestionType,
+  QuestionWithoutId,
+  Survey,
+  SurveyWithoutId,
+} from '../../types/Survey'
 import Button from '../atoms/Button'
 import InputField from '../atoms/InputField'
 import InputFieldLabel from '../atoms/InputFieldLabel'
 import SurveyQuestionSet from '../molecules/SurveyQuestionSet'
+import { v4 as uuidv4 } from 'uuid'
 
 type CreateUpdateSurveyProps = {
   type: 'create' | 'update'
@@ -36,12 +43,9 @@ const CreateUpdateSurvey = (props: CreateUpdateSurveyProps) => {
     })
 
   const onClickAddQuestion = () => {
-    const id = survey.questions.length
-      ? (parseInt(survey.questions[survey.questions.length - 1].id) + 1).toString()
-      : '1'
-    const newQuestion: Question = {
-      id,
-      type: 'ShortText',
+    const newQuestion = {
+      tempId: uuidv4(),
+      type: 'ShortText' as QuestionType,
       text: 'Enter your question here...',
     }
 
@@ -52,10 +56,19 @@ const CreateUpdateSurvey = (props: CreateUpdateSurveyProps) => {
   }
 
   const onClickSave = async () => {
+    const surveyToSave = {
+      ...survey,
+      questions: survey.questions.map(q => {
+        if (q.tempId) {
+          delete q.tempId
+        }
+        return q
+      }),
+    }
     if (props.type === 'create') {
-      await createSurvey(survey)
+      await createSurvey(surveyToSave)
     } else if (props.type === 'update') {
-      const res = await updateSurvey((survey as Survey).id, survey as Survey)
+      const res = await updateSurvey((surveyToSave as Survey)._id, surveyToSave as Survey)
       if (res.status === 404) {
         console.error('An error occured. Please try again later.')
         return

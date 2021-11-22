@@ -3,9 +3,10 @@ import { Without } from './utils'
 export type QuestionType = 'ShortText' | 'LongText'
 
 export type BaseQuestion = {
-  id: string
+  _id?: string
   type: QuestionType
   text: string
+  tempId?: string // used during create/edit process
 }
 
 export interface ShortTextQuestion extends BaseQuestion {}
@@ -19,12 +20,13 @@ export interface LongTextQuestion extends BaseQuestion {
 export type Question = ShortTextQuestion | LongTextQuestion
 
 export type Survey = {
-  id: string
+  _id: string
   name: string
   questions: Question[]
 }
 
-export type SurveyWithoutId = Without<Survey, 'id'>
+export type SurveyWithoutId = Without<Survey, '_id'>
+export type QuestionWithoutId = Without<Question, '_id'>
 
 // id: question id
 export type ShortTextAnswers = {

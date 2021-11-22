@@ -12,7 +12,6 @@ import { withIronSessionSsr } from 'iron-session/next'
 import { sessionOptions } from '../lib/session'
 
 const Dashboard = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const { user } = props
   const { data, error } = useSWR<Survey[]>('/api/survey')
 
   if (error) return <div>failed to load</div>
@@ -24,7 +23,7 @@ const Dashboard = (props: InferGetServerSidePropsType<typeof getServerSideProps>
         <h1>Surveys</h1>
         <List>
           {data.map(s => (
-            <LinkListElement text={s.name} href={`/survey/edit/${s.id}`} key={s.id} />
+            <LinkListElement text={s.name} href={`/survey/edit/${s._id}`} key={s._id} />
           ))}
         </List>
         <Link href={'/survey/create'}>
