@@ -1,9 +1,25 @@
-import React, {Component} from 'react'
+import React, { useState } from 'react'
+import './styles/Component.css'
 
-export default class extends Component {
-  render() {
-    return <div>
-      <h2>Welcome to React components</h2>
+const Component = props => {
+  const [isOpen, setIsOpen] = useState(false)
+
+  const popupClasses = `popup ${isOpen ? '' : 'hidden'}`
+
+  const onOpenCloseSurvey = () => setIsOpen(!isOpen)
+  return (
+    <div>
+      <button onClick={onOpenCloseSurvey}>Open Survey</button>
+      <div className={popupClasses}>
+        <div>
+          <span className="close-button" onClick={onOpenCloseSurvey}>
+            X
+          </span>
+        </div>
+        <iframe src={props.surveyLink}>Browser not compatible.</iframe>
+      </div>
     </div>
-  }
+  )
 }
+
+export default Component
