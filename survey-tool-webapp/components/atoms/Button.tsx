@@ -1,16 +1,19 @@
+import { ButtonHTMLAttributes } from 'react'
 import styles from './Button.module.css'
 
-type ButtonType = 'primary' | 'secondary' | 'success' | 'error'
+type ButtonColor = 'primary' | 'secondary' | 'success' | 'error'
+type ButtonType = 'button' | 'submit' | 'reset'
 
 type ButtonProps = {
   text: string
-  onClick: () => void
-  type: ButtonType
+  color: ButtonColor
+  onClick?: () => void
+  type?: ButtonType
 }
 
 const Button = (props: ButtonProps) => {
   let classes
-  switch (props.type) {
+  switch (props.color) {
     case 'primary':
       classes = styles.primary
       break
@@ -25,7 +28,7 @@ const Button = (props: ButtonProps) => {
       break
   }
   return (
-    <button className={classes} onClick={props.onClick}>
+    <button type={props.type} className={classes} onClick={props.onClick}>
       {props.text}
     </button>
   )

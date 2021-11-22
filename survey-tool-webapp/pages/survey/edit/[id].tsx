@@ -3,7 +3,6 @@ import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
 
-import fetcher from '../../../utils/fetcher'
 import { Survey } from '../../../types/Survey'
 
 import CreateUpdateSurvey from '../../../components/organisms/createUpdateSurvey'
@@ -12,7 +11,7 @@ const EditSurvey: NextPage = () => {
   const router = useRouter()
   const { id } = router.query
   const [survey, setSurvey] = useState<Survey>()
-  const { data, error } = useSWR<Survey>(id ? `/api/survey/${id}` : null, fetcher)
+  const { data, error } = useSWR<Survey>(id ? `/api/survey/${id}` : null)
 
   useEffect(() => {
     if (data) {

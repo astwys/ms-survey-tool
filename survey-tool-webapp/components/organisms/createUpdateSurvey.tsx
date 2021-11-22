@@ -65,10 +65,10 @@ const CreateUpdateSurvey = (props: CreateUpdateSurveyProps) => {
 
   return (
     <div className={styles.container}>
-      <InputField text={survey.name} onChange={onChangeSurveyName} inputType="text" />
+      <InputField text={survey.name} onChange={onChangeSurveyName} type="text" />
       <SurveyQuestionSet questions={survey.questions} onChange={onChangeQuestions} />
-      <Button text="Add Question" type="primary" onClick={onClickAddQuestion} />
-      <Button text="Save" type="success" onClick={onClickSave} />
+      <Button text="Add Question" color="primary" onClick={onClickAddQuestion} />
+      <Button text="Save" color="success" onClick={onClickSave} />
     </div>
   )
 }

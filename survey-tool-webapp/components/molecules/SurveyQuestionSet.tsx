@@ -22,7 +22,7 @@ const SurveyQuestionSet = (props: SurveyQuestionSetProps) => {
     <div>
       {props.questions.map(q => (
         <p key={q.id}>
-          <InputField text={q.text} onChange={onChangeQuestion(q.id)} inputType="text" />
+          <InputField text={q.text} onChange={onChangeQuestion(q.id)} type="text" />
         </p>
       ))}
     </div>

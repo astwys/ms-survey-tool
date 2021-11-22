@@ -1,9 +1,14 @@
-import { HTMLInputTypeAttribute } from 'react'
+import { DetailedHTMLProps, HTMLInputTypeAttribute, InputHTMLAttributes } from 'react'
+import { Without } from '../../types/utils'
 
-type InputFieldProps = {
+type InputProps = Without<
+  DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>,
+  'onChange'
+>
+
+type InputFieldProps = Partial<InputProps> & {
   text: string
   onChange: (value: string) => void
-  inputType: HTMLInputTypeAttribute
 }
 
 const InputField = (props: InputFieldProps) => {
@@ -14,7 +19,7 @@ const InputField = (props: InputFieldProps) => {
     props.onChange(e.target.value)
   }
 
-  return <input type={props.inputType} onChange={onChange} value={currentText} />
+  return <input type={props.type} onChange={onChange} value={currentText} />
 }
 
 export default InputField
