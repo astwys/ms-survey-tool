@@ -16,11 +16,11 @@ export function findById(id: number): Survey | undefined {
 }
 
 export function createOne(baseSurvey: BaseSurvey) {
-  const id = surveys[surveys.length -1].id + 1
-    const survey = {
-      ...baseSurvey,
-      id
-    }
-    surveys = [...surveys, survey]
-    return survey
+  const id = surveys[surveys.length - 1].id + 1
+  const survey = {
+    ...baseSurvey,
+    id,
+  }
+  surveys = [...surveys, survey]
+  return survey
 }
