@@ -19,7 +19,7 @@ const InputField = (props: InputFieldProps) => {
     props.onChange(e.target.value)
   }
 
-  return <input type={props.type} onChange={onChange} value={currentText} />
+  return <input {...props} onChange={onChange} value={currentText} />
 }
 
 export default InputField

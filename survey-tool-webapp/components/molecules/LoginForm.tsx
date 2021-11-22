@@ -1,6 +1,7 @@
 import { FormEvent, useState } from 'react'
 import Button from '../atoms/Button'
 import InputField from '../atoms/InputField'
+import InputFieldLabel from '../atoms/InputFieldLabel'
 
 type FormProps = {
   errorMessage: string
@@ -16,12 +17,19 @@ const LoginForm = (props: FormProps) => {
 
   return (
     <div>
-      <label>
-        <span>Username</span>
-        <InputField type="text" name="username" required text={username} onChange={setUserName} />
-      </label>
-      <label>
-        <span>Password</span>
+      <div>
+        <InputFieldLabel htmlFor="username">Username</InputFieldLabel>
+        <InputField
+          id="username"
+          type="text"
+          name="username"
+          required
+          text={username}
+          onChange={setUserName}
+        />
+      </div>
+      <div>
+        <InputFieldLabel htmlFor="password">Password</InputFieldLabel>
         <InputField
           type="password"
           name="password"
@@ -29,7 +37,7 @@ const LoginForm = (props: FormProps) => {
           text={password}
           onChange={setPassword}
         />
-      </label>
+      </div>
 
       <Button text="Login" color="primary" type="submit" onClick={onClickSubmit} />
 

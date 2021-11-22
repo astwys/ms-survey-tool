@@ -1,5 +1,6 @@
 import { Question } from '../../types/Survey'
 import InputField from '../atoms/InputField'
+import InputFieldLabel from '../atoms/InputFieldLabel'
 
 type SurveyQuestionSetProps = {
   questions: Question[]
@@ -22,7 +23,8 @@ const SurveyQuestionSet = (props: SurveyQuestionSetProps) => {
     <div>
       {props.questions.map(q => (
         <p key={q.id}>
-          <InputField text={q.text} onChange={onChangeQuestion(q.id)} type="text" />
+          <InputFieldLabel htmlFor={`${q.id}`}>Question: </InputFieldLabel>
+          <InputField text={q.text} onChange={onChangeQuestion(q.id)} type="text" id={`${q.id}`} />
         </p>
       ))}
     </div>
