@@ -1,4 +1,4 @@
-import { Survey, SurveyWithoutId } from '../types/Survey'
+import { Survey } from '../types/Survey'
 
 export function updateSurvey(id: string, survey: Survey): Promise<Response> {
   return fetch(`/api/survey/${id}`, {
@@ -10,7 +10,7 @@ export function updateSurvey(id: string, survey: Survey): Promise<Response> {
   })
 }
 
-export function createSurvey(survey: SurveyWithoutId): Promise<Response> {
+export function createSurvey(survey: Survey): Promise<Response> {
   return fetch('/api/survey', {
     body: JSON.stringify(survey),
     headers: {

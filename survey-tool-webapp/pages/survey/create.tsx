@@ -1,12 +1,12 @@
 import { useMemo } from 'react'
-import { SurveyWithoutId } from '../../types/Survey'
 import CreateUpdateSurvey from '../../components/organisms/createUpdateSurvey'
 import { withIronSessionSsr } from 'iron-session/next'
 import { sessionOptions } from '../../lib/session'
 import { InferGetServerSidePropsType } from 'next'
+import { Survey } from '../../types/Survey'
 
 const CreateSurvey = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const survey = useMemo<SurveyWithoutId>(() => ({ name: '', questions: [] }), [])
+  const survey = useMemo<Survey>(() => ({ name: '', questions: [] }), [])
 
   return <CreateUpdateSurvey type="create" survey={survey} />
 }

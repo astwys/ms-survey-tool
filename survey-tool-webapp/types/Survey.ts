@@ -1,5 +1,3 @@
-import { Without } from './utils'
-
 export type QuestionType = 'ShortText' | 'LongText'
 
 export type BaseQuestion = {
@@ -20,13 +18,10 @@ export interface LongTextQuestion extends BaseQuestion {
 export type Question = ShortTextQuestion | LongTextQuestion
 
 export type Survey = {
-  _id: string
+  _id?: string
   name: string
   questions: Question[]
 }
-
-export type SurveyWithoutId = Without<Survey, '_id'>
-export type QuestionWithoutId = Without<Question, '_id'>
 
 export type BaseAnswer = {
   _id?: string

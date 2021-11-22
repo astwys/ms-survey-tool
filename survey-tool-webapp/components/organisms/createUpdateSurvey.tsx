@@ -2,13 +2,7 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { useSWRConfig } from 'swr'
 import { createSurvey, updateSurvey } from '../../requests/survey'
-import {
-  Question,
-  QuestionType,
-  QuestionWithoutId,
-  Survey,
-  SurveyWithoutId,
-} from '../../types/Survey'
+import { Question, QuestionType, Survey } from '../../types/Survey'
 import Button from '../atoms/Button'
 import InputField from '../atoms/InputField'
 import InputFieldLabel from '../atoms/InputFieldLabel'
@@ -17,13 +11,13 @@ import { v4 as uuidv4 } from 'uuid'
 
 type CreateUpdateSurveyProps = {
   type: 'create' | 'update'
-  survey: Survey | SurveyWithoutId
+  survey: Survey
 }
 
 const CreateUpdateSurvey = (props: CreateUpdateSurveyProps) => {
   const router = useRouter()
   const { mutate } = useSWRConfig()
-  const [survey, setSurvey] = useState<Survey | SurveyWithoutId>(props.survey)
+  const [survey, setSurvey] = useState<Survey>(props.survey)
 
   useEffect(() => {
     setSurvey(props.survey)
