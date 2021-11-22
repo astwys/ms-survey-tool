@@ -7,7 +7,7 @@ type SurveyQuestionSetProps = {
   onChange: (questions: Question[]) => void
 }
 const SurveyQuestionSet = (props: SurveyQuestionSetProps) => {
-  const onChangeQuestion = (id: number) => (text: string) => {
+  const onChangeQuestion = (id: string) => (text: string) => {
     const newQuestions = props.questions.map(q => {
       if (q.id === id) {
         q.text = text
@@ -23,8 +23,8 @@ const SurveyQuestionSet = (props: SurveyQuestionSetProps) => {
     <div>
       {props.questions.map(q => (
         <p key={q.id}>
-          <InputFieldLabel htmlFor={`${q.id}`}>Question: </InputFieldLabel>
-          <InputField text={q.text} onChange={onChangeQuestion(q.id)} type="text" id={`${q.id}`} />
+          <InputFieldLabel htmlFor={q.id}>Question: </InputFieldLabel>
+          <InputField text={q.text} onChange={onChangeQuestion(q.id)} type="text" id={q.id} />
         </p>
       ))}
     </div>

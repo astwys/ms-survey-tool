@@ -3,7 +3,7 @@ import { Without } from './utils'
 export type QuestionType = 'ShortText' | 'LongText'
 
 export type BaseQuestion = {
-  id: number
+  id: string
   type: QuestionType
   text: string
 }
@@ -19,13 +19,26 @@ export interface LongTextQuestion extends BaseQuestion {
 export type Question = ShortTextQuestion | LongTextQuestion
 
 export type Survey = {
-  id: number
+  id: string
   name: string
   questions: Question[]
 }
 
 export type SurveyWithoutId = Without<Survey, 'id'>
 
+// id: question id
 export type ShortTextAnswers = {
-  [id: number]: string
+  [id: string]: string
+}
+
+// id: question id
+export type LongTextAnswers = {
+  [id: string]: string
+}
+
+export type Answers = ShortTextAnswers | LongTextAnswers
+
+// id: survey id
+export type SurveyAnswers = {
+  [id: string]: Answers[]
 }

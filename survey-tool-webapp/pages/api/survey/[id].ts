@@ -4,21 +4,22 @@ import { findById, updateById } from '../../../mockApi'
 
 export default function handler(req: NextApiRequest, res: NextApiResponse<Survey | string>) {
   const { id } = req.query
-  const idNumber = parseInt(id as string)
 
   if (req.method === 'GET') {
-    const survey = findById(idNumber)
+    const survey = findById(id as string)
     if (!survey) {
       res.status(404).send('Not Found')
       return
     }
     res.status(200).json(survey)
   } else if (req.method === 'PUT') {
-    const survey = updateById(idNumber, req.body)
+    const survey = updateById(id as string, req.body)
     if (!survey) {
       res.status(404).send('Not Found')
       return
     }
     res.status(200).json(survey)
+  } else {
+    res.status(501).send('Not Implemented')
   }
 }
