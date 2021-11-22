@@ -15,6 +15,7 @@ const Dashboard: NextPage = () => {
 
   if (error) return <div>failed to load</div>
   if (!data) return <div>loading...</div>
+
   return (
     <div className={styles.container}>
       <List>
