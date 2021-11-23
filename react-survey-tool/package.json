@@ -29,10 +29,10 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
-  "author": "",
-  "homepage": "",
+  "author": "Michael Bartl",
+  "homepage": "https://github.com/astwys/ms-survey-tool/tree/main/react-survey-tool",
   "license": "MIT",
-  "repository": "",
+  "repository": "https://github.com/astwys/ms-survey-tool/tree/main/react-survey-tool",
   "keywords": [
     "react-component"
   ]

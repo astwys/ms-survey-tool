@@ -1,16 +1,17 @@
 # react-survey-tool
 
-[![Travis][build-badge]][build]
-[![npm package][npm-badge]][npm]
-[![Coveralls][coveralls-badge]][coveralls]
+This React component can be used to add a survey to your website.
 
-Describe react-survey-tool here.
+## Usage
 
-[build-badge]: https://img.shields.io/travis/user/repo/master.png?style=flat-square
-[build]: https://travis-ci.org/user/repo
+1. Go to (https://ms-survey-tool-ltvvprqeq-astwys.vercel.app)[https://ms-survey-tool-ltvvprqeq-astwys.vercel.app] to create a new survey.
+2. Copy the provided survey URL from the survey edit page.
+3. Create the survey link by appending the survey token (provided by me) to the url in the following format: `<SURVEY_URL>?token=<SURVEY_TOKEN>`
 
-[npm-badge]: https://img.shields.io/npm/v/npm-package.png?style=flat-square
-[npm]: https://www.npmjs.org/package/npm-package
+Now you can use the component inside of your project.
 
-[coveralls-badge]: https://img.shields.io/coveralls/user/repo/master.png?style=flat-square
-[coveralls]: https://coveralls.io/github/user/repo
+```
+<SurveyTool
+  surveyLink="<SURVEY_LINK>"
+/>
+```
