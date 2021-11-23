@@ -1,5 +1,15 @@
 import mongoose from 'mongoose'
-import { QuestionSchema } from './Question'
+
+const QuestionSchema = new mongoose.Schema({
+  type: {
+    type: String,
+    required: [true, 'Please provide a type for this question.'],
+  },
+  text: {
+    type: String,
+    required: [true, 'Please provide a text for this question.'],
+  },
+})
 
 const SurveySchema = new mongoose.Schema({
   name: {
