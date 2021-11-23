@@ -6,7 +6,7 @@ It can be accessed at [https://ms-survey-tool-ltvvprqeq-astwys.vercel.app/](http
 An admin user can log in to manage all surveys.  
 Each survey also provides an access link which, in combination with a token, can be used to access a survey and/or integrate the [react-survey-tool](https://www.npmjs.com/package/react-survey-tool) library into your own project.
 
-Create the survey link by appending the survey token (environment variable) to the url in the following format: <SURVEY_URL>?token=<SURVEY_TOKEN>.
+Create the survey link by appending the survey token (environment variable) to the url in the following format: `<SURVEY_URL>?token=<SURVEY_TOKEN>`.
 
 ## Development
 
