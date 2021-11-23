@@ -7,13 +7,22 @@ import InputField from '../../components/atoms/InputField'
 import InputFieldLabel from '../../components/atoms/InputFieldLabel'
 import { createAnswerSet } from '../../requests/answerSet'
 import { Answers, ShortTextAnswers, Survey } from '../../types/Survey'
+import { GetServerSideProps } from 'next'
 
-const Survey = () => {
+type SurveyProps = {
+  surveyToken: string
+}
+
+const Survey = (props: SurveyProps) => {
   const router = useRouter()
-  const { id } = router.query
+  const { id, token } = router.query
   const [survey, setSurvey] = useState<Survey>()
   const { data, error } = useSWR<Survey>(id ? `/api/survey/${id}` : null)
   const [answers, setAnswers] = useState<Answers[]>([])
+
+  if (token != props.surveyToken) {
+    return <div>Unauthorized. Please provide to correct token.</div>
+  }
 
   useEffect(() => {
     if (data) {
@@ -41,12 +50,13 @@ const Survey = () => {
     if (!survey) {
       return
     }
-    await createAnswerSet(survey._id, answers)
+    await createAnswerSet(survey._id as string, answers)
     router.reload()
   }
 
   if (error) return <div>failed to load</div>
   if (!data || !survey) return <div>loading...</div>
+
   return (
     <div className="container">
       <Head>
@@ -70,6 +80,14 @@ const Survey = () => {
       <Button color="success" text="Submit" onClick={onSubmit} />
     </div>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async context => {
+  return {
+    props: {
+      surveyToken: process.env.SURVEY_TOKEN,
+    },
+  }
 }
 
 export default Survey
