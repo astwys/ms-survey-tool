@@ -1,7 +1,7 @@
 # Survey-Tool Webapp
 
 This is a Next.js webapp used to create and edit surveys.
-It can be accessed at [https://ms-survey-tool-ltvvprqeq-astwys.vercel.app/](https://ms-survey-tool-ltvvprqeq-astwys.vercel.app/).
+It can be accessed at [https://ms-survey-tool.vercel.app/](https://ms-survey-tool.vercel.app/).
 
 An admin user can log in to manage all surveys.  
 Each survey also provides an access link which, in combination with a token, can be used to access a survey and/or integrate the [react-survey-tool](https://www.npmjs.com/package/react-survey-tool) library into your own project.
