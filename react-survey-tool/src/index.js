@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
-import './styles/Component.css'
 
-const Component = props => {
+const SurveyTool = props => {
   const [isOpen, setIsOpen] = useState(false)
 
   const popupClasses = `popup ${isOpen ? '' : 'hidden'}`
@@ -22,4 +21,4 @@ const Component = props => {
   )
 }
 
-export default Component
+export default SurveyTool

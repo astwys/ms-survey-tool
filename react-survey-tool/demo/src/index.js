@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
 
+import '../../css/SurveyTool.css'
 import SurveyTool from '../../src'
 import surveyToken from './.env'
 
