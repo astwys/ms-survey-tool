@@ -4,7 +4,7 @@ This React component can be used to add a survey to your website.
 
 ## Usage
 
-1. Go to (https://ms-survey-tool-ltvvprqeq-astwys.vercel.app)[https://ms-survey-tool-ltvvprqeq-astwys.vercel.app] to create a new survey.
+1. Go to [https://ms-survey-tool-ltvvprqeq-astwys.vercel.app](https://ms-survey-tool-ltvvprqeq-astwys.vercel.app) to create a new survey.
 2. Copy the provided survey URL from the survey edit page.
 3. Create the survey link by appending the survey token (provided by me) to the url in the following format: `<SURVEY_URL>?token=<SURVEY_TOKEN>`
 
