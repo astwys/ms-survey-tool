@@ -62,7 +62,7 @@ const CreateUpdateSurvey = (props: CreateUpdateSurveyProps) => {
     if (props.type === 'create') {
       await createSurvey(surveyToSave)
     } else if (props.type === 'update') {
-      const res = await updateSurvey((surveyToSave as Survey)._id, surveyToSave as Survey)
+      const res = await updateSurvey(surveyToSave._id as string, surveyToSave)
       if (res.status === 404) {
         console.error('An error occured. Please try again later.')
         return

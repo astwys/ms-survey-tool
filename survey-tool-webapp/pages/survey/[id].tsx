@@ -19,13 +19,10 @@ const Survey = (props: SurveyProps) => {
   const [survey, setSurvey] = useState<Survey>()
   const { data, error } = useSWR<Survey>(id ? `/api/survey/${id}` : null)
   const [answers, setAnswers] = useState<Answers[]>([])
-
-  if (token != props.surveyToken) {
-    return <div>Unauthorized. Please provide to correct token.</div>
-  }
+  const [tokenValid, setTokenValid] = useState(false)
 
   useEffect(() => {
-    if (data) {
+    if (data && tokenValid) {
       setSurvey(data)
       const answerSet: ShortTextAnswers[] = data.questions.map(q => ({
         questionId: q._id as string,
@@ -33,7 +30,11 @@ const Survey = (props: SurveyProps) => {
       }))
       setAnswers(answerSet)
     }
-  }, [data])
+  }, [data, tokenValid])
+
+  useEffect(() => {
+    setTokenValid(token === props.surveyToken)
+  }, [token, props.surveyToken])
 
   const onChangeAnswer = (id: string) => (text: string) => {
     const newAnswers = answers.map(a => {
@@ -54,6 +55,9 @@ const Survey = (props: SurveyProps) => {
     router.reload()
   }
 
+  if (!tokenValid) {
+    return <div>Unauthorized. Please provide to correct token.</div>
+  }
   if (error) return <div>failed to load</div>
   if (!data || !survey) return <div>loading...</div>
 

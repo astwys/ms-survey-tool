@@ -33,16 +33,17 @@ export default function Header() {
           )}
           {user?.isLoggedIn && (
             <li className={styles.li}>
-              <a
-                href="/api/logout"
-                onClick={async e => {
-                  e.preventDefault()
-                  mutateUser(await fetchJson('/api/logout', { method: 'POST' }), false)
-                  router.push('/login')
-                }}
-              >
-                Logout
-              </a>
+              <Link href="/api/logout">
+                <a
+                  onClick={async e => {
+                    e.preventDefault()
+                    mutateUser(await fetchJson('/api/logout', { method: 'POST' }), false)
+                    router.push('/login')
+                  }}
+                >
+                  Logout
+                </a>
+              </Link>
             </li>
           )}
         </ul>
