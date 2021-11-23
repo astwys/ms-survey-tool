@@ -10,7 +10,12 @@ This React component can be used to add a survey to your website.
 
 Now you can use the component inside of your project.
 
+Relevant code snippets:
+
 ```
+import SurveyTool from "react-survey-tool";
+import "react-survey-tool/css/SurveyTool.css";
+
 <SurveyTool
   surveyLink="<SURVEY_LINK>"
 />
