@@ -8,7 +8,11 @@ import { Survey } from '../../types/Survey'
 const CreateSurvey = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const survey = useMemo<Survey>(() => ({ name: '', questions: [] }), [])
 
-  return <CreateUpdateSurvey type="create" survey={survey} />
+  return (
+    <div className="container">
+      <CreateUpdateSurvey type="create" survey={survey} />
+    </div>
+  )
 }
 
 export const getServerSideProps = withIronSessionSsr(async function ({ req, res }) {

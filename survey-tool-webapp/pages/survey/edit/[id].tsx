@@ -14,6 +14,7 @@ const EditSurvey = (props: InferGetServerSidePropsType<typeof getServerSideProps
   const { id } = router.query
   const [survey, setSurvey] = useState<Survey>()
   const { data, error } = useSWR<Survey>(id ? `/api/survey/${id}` : null)
+  const [surveyUrl, setSurveyUrl] = useState<string>()
 
   useEffect(() => {
     if (data) {
@@ -21,10 +22,20 @@ const EditSurvey = (props: InferGetServerSidePropsType<typeof getServerSideProps
     }
   }, [data])
 
+  useEffect(() => {
+    const url = `${props.host}/survey/${id}`
+    setSurveyUrl(url)
+  }, [id])
+
   if (error) return <div>failed to load</div>
   if (!data || !survey) return <div>loading...</div>
 
-  return <CreateUpdateSurvey type="update" survey={survey} />
+  return (
+    <div className="container">
+      <CreateUpdateSurvey type="update" survey={survey} />
+      {surveyUrl && <p>Survey URL: {surveyUrl}</p>}
+    </div>
+  )
 }
 
 export const getServerSideProps = withIronSessionSsr(async function ({ req, res }) {
@@ -40,7 +51,7 @@ export const getServerSideProps = withIronSessionSsr(async function ({ req, res 
   }
 
   return {
-    props: { user: req.session.user },
+    props: { user: req.session.user, host: req.headers.host },
   }
 }, sessionOptions)
 

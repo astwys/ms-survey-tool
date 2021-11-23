@@ -84,7 +84,7 @@ const CreateUpdateSurvey = (props: CreateUpdateSurveyProps) => {
   }
 
   return (
-    <div className="container">
+    <div>
       {renderHeader()}
       <InputFieldLabel htmlFor="survey-name">Survey Name</InputFieldLabel>
       <InputField text={survey.name} id="survey-name" onChange={onChangeSurveyName} type="text" />
