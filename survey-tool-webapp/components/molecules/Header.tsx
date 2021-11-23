@@ -2,6 +2,7 @@ import Link from 'next/link'
 import useUser from '../../lib/useUser'
 import { useRouter } from 'next/router'
 import fetchJson from '../../lib/fetchJson'
+import styles from './Header.module.css'
 
 export default function Header() {
   const { user, mutateUser } = useUser()
@@ -10,21 +11,28 @@ export default function Header() {
   return (
     <header>
       <nav>
-        <ul>
-          <li>
+        <ul className={styles.ul}>
+          <li className={styles.li}>
             <Link href="/">
               <a>Home</a>
             </Link>
           </li>
-          {user?.isLoggedIn === false && (
-            <li>
+          {user?.isLoggedIn && (
+            <li className={styles.li}>
+              <Link href="/dashboard">
+                <a>Dashboard</a>
+              </Link>
+            </li>
+          )}
+          {!user?.isLoggedIn && (
+            <li className={styles.li}>
               <Link href="/login">
                 <a>Login</a>
               </Link>
             </li>
           )}
-          {user?.isLoggedIn === true && (
-            <li>
+          {user?.isLoggedIn && (
+            <li className={styles.li}>
               <a
                 href="/api/logout"
                 onClick={async e => {
